@@ -2,6 +2,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_jsglue import JSGlue
 from flask import Flask, render_template, request, session, jsonify
+from datetime import datetime
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = ''
@@ -12,8 +13,6 @@ app = Flask(__name__)
 #     id = db.Column(db.Integer, primary_key=True)
 #     imgHead = db.Column(db.String(80), unique=False, nullable=True)
 #     title = db.Column(db.String(80), unique=True, nullable=False)
-
-    
 #     subtitle1 = db.Column(db.String(80), unique=False, nullable=True)
 #     intro = db.Column(db.Text, unique=True, nullable=False)
 #     subtitle2 = db.Column(db.String(80), unique=False, nullable=True)
@@ -33,6 +32,7 @@ app = Flask(__name__)
 #         self.subtitle3 = subtitle3
 #         self.conclusion = conclusion
 #         self.date = date
+
 
 JSGlue(app)
 
@@ -59,11 +59,11 @@ def admin():
     if request.method == "POST":
         # Ensure username was submitted
         if not request.form.get("username"):
-            return print(request.form.get("username"))
+            return render_template("adminLogin.html")
 
         # Ensure password was submitted
-        if request.form.get("password") == "":
-            return print(request.form.get("password"))
+        if not request.form.get("password"):
+            return render_template("adminLogin.html")
 
         print("TEST!!!!!!")
         print(request.form.get("username"))
@@ -72,6 +72,41 @@ def admin():
 
         if request.form.get("username") == "" and request.form.get("password") == "":
             return render_template("insertBlog.html")
+        
+        return render_template("adminLogin.html")
+
+    else:
+        return render_template("adminLogin.html")
+
+@app.route("/_insertBlog", methods=['GET', 'POST'])
+def _insertBlog():
+    if request.method == "POST":
+        # Server-side validation
+        if not request.form.get("title"):
+            return render_template("insertBlog.html")
+
+        if not request.form.get("introduction"):
+            return render_template("insertBlog.html")
+
+        # Variable initialization
+        img = "/static/img/"
+        img += "personal background.jpg"
+        blogTitle = request.form.get("title")
+        blogSub1 = request.form.get("subtitle1")
+        blogIntro = request.form.get("introduction")
+        blogSub2 = request.form.get("subtitle2")
+        blogBody = request.form.get("body")
+        blogSub3 = request.form.get("subtitle3")
+        blogConclusion = request.form.get("conclusion")
+        blogTime = datetime.now()
+
+        #Insert new Blog
+        # newBlog = Blog(None, img, blogTitle, blogSub1, blogIntro, blogSub2, blogBody, blogSub3, blogConclusion, blogTime)
+        # db.session.add(newBlog)
+        # db.session.commit()
+
+
+        return jsonify(result="Success!!!")
 
     else:
         return render_template("adminLogin.html")
