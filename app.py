@@ -2,7 +2,9 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_jsglue import JSGlue
 from flask import Flask, render_template, request, session, jsonify
+from sqlalchemy import desc
 from datetime import datetime
+from blogPost import BlogPost
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = ''
@@ -50,9 +52,18 @@ def about():
 def contact():
     return render_template("contact.html")
 
-@app.route("/post")
+@app.route("/post", methods=['GET', 'POST'])
 def post():
-    return render_template("post.html")
+    if request.method == "GET":
+
+        posts = Blog.query.order_by(desc(Blog.date)).first()
+        post = BlogPost(1, posts.imgHead, posts.title, posts.subtitle1, posts.intro, posts.subtitle2, posts.body, posts.subtitle3, posts.conclusion, posts.date)
+
+
+        return render_template("post.html", blogPost=post)
+
+    else:    
+        return render_template("/about")
 
 @app.route("/admin", methods=['GET', 'POST'])
 def admin():
@@ -101,9 +112,9 @@ def _insertBlog():
         blogTime = datetime.now()
 
         #Insert new Blog
-        # newBlog = Blog(None, img, blogTitle, blogSub1, blogIntro, blogSub2, blogBody, blogSub3, blogConclusion, blogTime)
-        # db.session.add(newBlog)
-        # db.session.commit()
+        newBlog = Blog(None, img, blogTitle, blogSub1, blogIntro, blogSub2, blogBody, blogSub3, blogConclusion, blogTime)
+        db.session.add(newBlog)
+        db.session.commit()
 
 
         return jsonify(result="Success!!!")
