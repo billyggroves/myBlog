@@ -1,12 +1,17 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_jsglue import JSGlue
-from flask import Flask, render_template, request, session, jsonify
+from flask import Flask, render_template, request, session, jsonify, send_from_directory, url_for, redirect
+from werkzeug.utils import secure_filename
 from sqlalchemy import desc
 from datetime import datetime
 from blogPost import BlogPost
 
+UPLOAD_FOLDER = '/Users/newuser/Desktop/myBlog/static/img'
+ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
+
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # app.config['SQLALCHEMY_DATABASE_URI'] = ''
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # db = SQLAlchemy(app)
@@ -38,6 +43,9 @@ app = Flask(__name__)
 
 JSGlue(app)
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route("/")
 @app.route("/home")
@@ -56,8 +64,8 @@ def contact():
 def post():
     if request.method == "GET":
 
-        posts = Blog.query.order_by(desc(Blog.date)).first()
-        post = BlogPost(1, posts.imgHead, posts.title, posts.subtitle1, posts.intro, posts.subtitle2, posts.body, posts.subtitle3, posts.conclusion, posts.date)
+        # posts = Blog.query.order_by(desc(Blog.date)).first()
+        # post = BlogPost(1, posts.imgHead, posts.title, posts.subtitle1, posts.intro, posts.subtitle2, posts.body, posts.subtitle3, posts.conclusion, posts.date)
 
 
         return render_template("post.html", blogPost=post)
@@ -93,15 +101,36 @@ def admin():
 def _insertBlog():
     if request.method == "POST":
         # Server-side validation
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            print(filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
         if not request.form.get("title"):
             return render_template("insertBlog.html")
 
         if not request.form.get("introduction"):
             return render_template("insertBlog.html")
 
+
         # Variable initialization
         img = "/static/img/"
-        img += "personal background.jpg"
+        if filename != "":
+            img += filename
+        else:
+            img += "personal background.jpg"
+
+        print(img)
         blogTitle = request.form.get("title")
         blogSub1 = request.form.get("subtitle1")
         blogIntro = request.form.get("introduction")
@@ -112,9 +141,9 @@ def _insertBlog():
         blogTime = datetime.now()
 
         #Insert new Blog
-        newBlog = Blog(None, img, blogTitle, blogSub1, blogIntro, blogSub2, blogBody, blogSub3, blogConclusion, blogTime)
-        db.session.add(newBlog)
-        db.session.commit()
+        # newBlog = Blog(None, img, blogTitle, blogSub1, blogIntro, blogSub2, blogBody, blogSub3, blogConclusion, blogTime)
+        # db.session.add(newBlog)
+        # db.session.commit()
 
 
         return jsonify(result="Success!!!")

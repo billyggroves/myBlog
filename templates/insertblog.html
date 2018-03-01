@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Home
+    Insert Blog
 {% endblock %}
 
 {% block main %}
@@ -30,7 +30,16 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <form action="/_insertBlog" method="post" name="blogPost" id="blogPost" novalidate>
+          <!-- <form action="/_insertImg" method=post enctype=multipart/form-data>
+            <p><input type="file" name="file">
+                <input type="submit" value="Upload">
+          </form> -->
+          <form action="/_insertBlog" method="post" name="blogPost" id="blogPost" enctype=multipart/form-data novalidate>
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                    <p><input type="file" name="file">
+                </div>
+              </div>
             <div class="control-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Title</label>
