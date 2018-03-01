@@ -7,7 +7,7 @@ from sqlalchemy import desc
 from datetime import datetime
 from blogPost import BlogPost
 
-UPLOAD_FOLDER = '/Users/newuser/Desktop/myBlog/static/img'
+UPLOAD_FOLDER = ""
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 
 app = Flask(__name__)
