@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  My Blog
+{% endblock %}
+
+{% block main %}
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('/static/img/home-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+              <h1>My Blog</h1>
+              <h2 class="subheading">Built by me to help keep track of things I've learned</h2>
+              <span class="meta">Posted by
+                <a href="/about">Bill Groves</a>
+                on March 1st, 2018</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <p>Test</p>
+            <h2 class="section-heading">Test</h2>
+            <p>Test</p>
+            <h2 class="section-heading">Test</h2>
+            <p>Test</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <hr>
+
+{% endblock %}
