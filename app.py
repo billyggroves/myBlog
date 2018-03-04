@@ -178,4 +178,3 @@ def _insertBlog():
     else:
         return render_template("adminLogin.html")
 
->>>>>>> 78cb7c6... Add app.py
