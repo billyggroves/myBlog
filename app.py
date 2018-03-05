@@ -75,7 +75,7 @@ def scoreCard():
 @app.route("/post", methods=['GET', 'POST'])
 def post():
     if request.method == "GET":
-        posts = Blog.query.order_by(desc(Blog.date)).all()
+        # posts = Blog.query.order_by(desc(Blog.date)).all()
 
         return render_template("allPosts.html", posts=posts)
     
@@ -88,8 +88,8 @@ def blog(blogTitle):
         if blogTitle == None:
             return redirect(url_for('post'))
 
-        posts = Blog.query.filter_by(title=blogTitle).first()
-        print(posts)
+        # posts = Blog.query.filter_by(title=blogTitle).first()
+        # print(posts)
         
         if posts != None:
             post = BlogPost(posts.id, posts.imgHead, posts.title, posts.subtitle1, posts.intro, posts.subtitle2, posts.body, posts.subtitle3, posts.conclusion, posts.date)
@@ -168,14 +168,12 @@ def _insertBlog():
         blogTime = datetime.now()
 
         #Insert new Blog
-        newBlog = Blog(None, img, blogTitle, blogSub1, blogIntro, blogSub2, blogBody, blogSub3, blogConclusion, blogTime)
-        db.session.add(newBlog)
-        db.session.commit()
+        # newBlog = Blog(None, img, blogTitle, blogSub1, blogIntro, blogSub2, blogBody, blogSub3, blogConclusion, blogTime)
+        # db.session.add(newBlog)
+        # db.session.commit()
 
 
         return jsonify(result="Success!!!")
 
     else:
         return render_template("adminLogin.html")
-
->>>>>>> 78cb7c6... Add app.py
