@@ -177,3 +177,5 @@ def _insertBlog():
 
     else:
         return render_template("adminLogin.html")
+
+# Deleted Git generated stuff from rebase
