@@ -75,7 +75,7 @@ def scoreCard():
 @app.route("/post", methods=['GET', 'POST'])
 def post():
     if request.method == "GET":
-        # posts = Blog.query.order_by(desc(Blog.date)).all()
+        posts = Blog.query.order_by(desc(Blog.date)).all()
 
         return render_template("allPosts.html", posts=posts)
     
@@ -92,7 +92,7 @@ def blog(blogTitle):
         # print(posts)
         
         if posts != None:
-            post = BlogPost(posts.id, posts.imgHead, posts.title, posts.subtitle1, posts.intro, posts.subtitle2, posts.body, posts.subtitle3, posts.conclusion, posts.date)
+            # post = BlogPost(posts.id, posts.imgHead, posts.title, posts.subtitle1, posts.intro, posts.subtitle2, posts.body, posts.subtitle3, posts.conclusion, posts.date)
             return render_template("post.html", blogPost=post)
 
         else:
@@ -129,15 +129,15 @@ def _insertBlog():
     if request.method == "POST":
         # Server-side validation
         # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
+        # if 'file' not in request.files:
+        #     flash('No file part')
+        #     return redirect(request.url)
         file = request.files['file']
         # if user does not select file, browser also
         # submit a empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
+        # if file.filename == '':
+        #     flash('No selected file')
+        #     return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             print(filename)
