@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block main %}
-<head>
-      <!-- Contact Form JavaScript -->
+<!-- <head>
+      Contact Form JavaScript
       <script src="js/jqBootstrapValidation.js"></script>
       <script src="js/contact_me.js"></script>  
-</head>
+</head> -->
 
     <!-- Page Header -->
     <header class="masthead" style="background-image: url('/static/img/contact-bg.jpg')">
@@ -34,65 +34,65 @@
             <p><input type="file" name="file">
                 <input type="submit" value="Upload">
           </form> -->
-          <form action="/_insertBlog" method="post" name="blogPost" id="blogPost" enctype=multipart/form-data novalidate>
+          <form action="/_insertBlog" method="post" name="blogPost"  enctype=multipart/form-data novalidate>
             <div class="control-group">
                 <div class="form-group floating-label-form-group controls">
                     <p><input type="file" name="file">
                 </div>
-              </div>
+            </div>
             <div class="control-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Title</label>
-                <input type="text" class="form-control" placeholder="Title" id="title" name="title" required data-validation-required-message="Please enter the title.">
+                <input type="text" class="form-control" placeholder="Title" name="title" required data-validation-required-message="Please enter the title.">
                 <p class="help-block text-danger"></p>
               </div>
             </div>
             <div class="control-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Subtitle</label>
-                <input type="text" class="form-control" placeholder="Subtitle" id="subtitle1" name="subtitle1" required data-validation-required-message="Please enter your subtitle.">
+                <input type="text" class="form-control" placeholder="Subtitle" name="subtitle1" required data-validation-required-message="Please enter your subtitle.">
                 <p class="help-block text-danger"></p>
               </div>
             </div>
             <div class="control-group">
               <div class="form-group col-xs-12 floating-label-form-group controls">
                 <label>Introduction</label>
-                <textarea rows="5" class="form-control" placeholder="Introduction" id="introduction" name="introduction" required data-validation-required-message="Please enter an introduction."></textarea>
+                <textarea rows="5" class="form-control" placeholder="Introduction" name="introduction" required data-validation-required-message="Please enter an introduction."></textarea>
                 <p class="help-block text-danger"></p>
               </div>
             </div>
             <div class="control-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Optional SubTitle</label>
-                <input type="text" class="form-control" placeholder="Optional SubTitle" id="subtitle2" name="subtitle2">
+                <input type="text" class="form-control" placeholder="Optional SubTitle" name="subtitle2">
                 <p class="help-block text-danger"></p>
               </div>
             </div>
             <div class="control-group">
               <div class="form-group col-xs-12 floating-label-form-group controls">
                 <label>Body</label>
-                <textarea rows="5" class="form-control" placeholder="Body" id="body" name="body"></textarea>
+                <textarea rows="5" class="form-control" placeholder="Body" name="body"></textarea>
                 <p class="help-block text-danger"></p>
               </div>
             </div>
             <div class="control-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Optional SubTitle</label>
-                <input type="text" class="form-control" placeholder="Optional SubTitle" id="subtitle3" name="subtitle3">
+                <input type="text" class="form-control" placeholder="Optional SubTitle" name="subtitle3">
                 <p class="help-block text-danger"></p>
               </div>
             </div>
             <div class="control-group">
               <div class="form-group col-xs-12 floating-label-form-group controls">
                 <label>Conclusion</label>
-                <textarea rows="5" class="form-control" placeholder="Conclusion" id="conclusion" name="conclusion"></textarea>
+                <textarea rows="5" class="form-control" placeholder="Conclusion" name="conclusion"></textarea>
                 <p class="help-block text-danger"></p>
               </div>
             </div>
             <br>
             <div id="success"></div>
             <div class="form-group">
-              <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+              <button type="submit" class="btn btn-primary" name="sendMessageButton">Send</button>
             </div>
           </form>
         </div>

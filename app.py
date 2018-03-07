@@ -12,33 +12,33 @@ ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# app.config['SQLALCHEMY_DATABASE_URI'] = ''
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = ""
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
-# class Blog(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     imgHead = db.Column(db.String(80), unique=False, nullable=False)
-#     title = db.Column(db.String(80), unique=True, nullable=False)
-#     subtitle1 = db.Column(db.String(80), unique=False, nullable=True)
-#     intro = db.Column(db.Text, unique=True, nullable=False)
-#     subtitle2 = db.Column(db.String(80), unique=False, nullable=True)
-#     body = db.Column(db.Text, unique=True, nullable=True)
-#     subtitle3 = db.Column(db.String(80), unique=False, nullable=True)
-#     conclusion = db.Column(db.Text, unique=True, nullable=True)
-#     date = db.Column(db.DateTime, unique=True, nullable=False)
+class Blog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    imgHead = db.Column(db.String(80), unique=False, nullable=False)
+    title = db.Column(db.String(80), unique=True, nullable=False)
+    subtitle1 = db.Column(db.String(80), unique=False, nullable=True)
+    intro = db.Column(db.Text, unique=True, nullable=False)
+    subtitle2 = db.Column(db.String(80), unique=False, nullable=True)
+    body = db.Column(db.Text, unique=True, nullable=True)
+    subtitle3 = db.Column(db.String(80), unique=False, nullable=True)
+    conclusion = db.Column(db.Text, unique=True, nullable=True)
+    date = db.Column(db.DateTime, unique=True, nullable=False)
 
-#     def __init__(self, id, imgHead, title, subtitle1, intro, subtitle2, body, subtitle3, conclusion, date):
-#         self.id = id
-#         self.imgHead = imgHead
-#         self.title = title
-#         self.subtitle1 = subtitle1
-#         self.intro = intro
-#         self.subtitle2 = subtitle2
-#         self.body = body
-#         self.subtitle3 = subtitle3
-#         self.conclusion = conclusion
-#         self.date = date
+    def __init__(self, id, imgHead, title, subtitle1, intro, subtitle2, body, subtitle3, conclusion, date):
+        self.id = id
+        self.imgHead = imgHead
+        self.title = title
+        self.subtitle1 = subtitle1
+        self.intro = intro
+        self.subtitle2 = subtitle2
+        self.body = body
+        self.subtitle3 = subtitle3
+        self.conclusion = conclusion
+        self.date = date
 
 
 JSGlue(app)
@@ -88,11 +88,11 @@ def blog(blogTitle):
         if blogTitle == None:
             return redirect(url_for('post'))
 
-        # posts = Blog.query.filter_by(title=blogTitle).first()
-        # print(posts)
+        posts = Blog.query.filter_by(title=blogTitle).first()
+        print(posts)
         
         if posts != None:
-            # post = BlogPost(posts.id, posts.imgHead, posts.title, posts.subtitle1, posts.intro, posts.subtitle2, posts.body, posts.subtitle3, posts.conclusion, posts.date)
+            post = BlogPost(posts.id, posts.imgHead, posts.title, posts.subtitle1, posts.intro, posts.subtitle2, posts.body, posts.subtitle3, posts.conclusion, posts.date)
             return render_template("post.html", blogPost=post)
 
         else:
@@ -132,16 +132,16 @@ def _insertBlog():
         # if 'file' not in request.files:
         #     flash('No file part')
         #     return redirect(request.url)
-        file = request.files['file']
+        # file = request.files['file']
         # if user does not select file, browser also
         # submit a empty part without filename
         # if file.filename == '':
         #     flash('No selected file')
         #     return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            print(filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        # if file and allowed_file(file.filename):
+        #     filename = secure_filename(file.filename)
+        #     print(filename)
+        #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         if not request.form.get("title"):
             return render_template("insertBlog.html")
@@ -151,13 +151,20 @@ def _insertBlog():
 
 
         # Variable initialization
+        file = request.files.get("file")
         img = "/static/img/"
-        if filename != "":
+        if file != None:
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                print(filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            
             img += filename
+
         else:
             img += "personal background.jpg"
 
-        print(img)
+        # print(img)
         blogTitle = request.form.get("title")
         blogSub1 = request.form.get("subtitle1")
         blogIntro = request.form.get("introduction")
@@ -166,16 +173,15 @@ def _insertBlog():
         blogSub3 = request.form.get("subtitle3")
         blogConclusion = request.form.get("conclusion")
         blogTime = datetime.now()
+        
 
         #Insert new Blog
-        # newBlog = Blog(None, img, blogTitle, blogSub1, blogIntro, blogSub2, blogBody, blogSub3, blogConclusion, blogTime)
-        # db.session.add(newBlog)
-        # db.session.commit()
+        newBlog = Blog(None, img, blogTitle, blogSub1, blogIntro, blogSub2, blogBody, blogSub3, blogConclusion, blogTime)
+        db.session.add(newBlog)
+        db.session.commit()
 
 
         return jsonify(result="Success!!!")
 
     else:
         return render_template("adminLogin.html")
-
-# Deleted Git generated stuff from rebase
