@@ -33,7 +33,7 @@ def post():
         return render_template("allPosts.html")
     
     else:
-        return url_for("/")
+        return redirect(url_for("page_not_found"))
 
 
 @app.route("/blog/<blogTitle>", methods=['GET', 'POST'])
@@ -47,7 +47,7 @@ def blog(blogTitle):
 
         name = blogTitle + ".html"
         # CITATION: https://stackoverflow.com/questions/10377998/how-can-i-iterate-over-files-in-a-given-directory
-        for filename in os.listdir(""):
+        for filename in os.listdir("./templates/blogPosts"):
             if filename.lower() == name:
                 post = "blogPosts/" + name
                 return render_template(post)
