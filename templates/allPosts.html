@@ -25,21 +25,45 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          {% for post in posts %}
             <div class="post-preview">
-              <a href="/blog/{{post.title}}">
+                <a href="/blog/myblog">
+                  <h2 class="post-title">
+                      My Blog
+                  </h2>
+                  <h3 class="post-subtitle">
+                      My personal blogging application.
+                  </h3>
+                </a>
+                <p class="post-meta">Posted by
+                  <a href="/about">Bill Groves</a>
+                  on March 3st, 2018</p>
+              </div>
+              <div class="post-preview">
+                <a href="/blog/prospectroulette">
+                  <h2 class="post-title">
+                      Prospect Roulette
+                  </h2>
+                  <h3 class="post-subtitle">
+                      My prospect tracking application.
+                  </h3>
+                </a>
+                <p class="post-meta">Posted by
+                  <a href="/about">Bill Groves</a>
+                  on March 2st, 2018</p>
+              </div>
+              <div class="post-preview">
+              <a href="/blog/scorecard">
                 <h2 class="post-title">
-                    {{post.title}}
+                    ScoreCard
                 </h2>
                 <h3 class="post-subtitle">
-                    {{post.subtitle1}}
+                    My card game score tracking application.
                 </h3>
               </a>
               <p class="post-meta">Posted by
                 <a href="/about">Bill Groves</a>
-                on {{post.date}}</p>
+                on March 1st, 2018</p>
             </div>
-          {% endfor %}
           <hr>
         </div>
       </div>

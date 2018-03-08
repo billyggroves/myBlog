@@ -7,181 +7,60 @@ from sqlalchemy import desc
 from datetime import datetime
 from blogPost import BlogPost
 
-UPLOAD_FOLDER = ""
-ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
-
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['SQLALCHEMY_DATABASE_URI'] = ""
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-class Blog(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    imgHead = db.Column(db.String(80), unique=False, nullable=False)
-    title = db.Column(db.String(80), unique=True, nullable=False)
-    subtitle1 = db.Column(db.String(80), unique=False, nullable=True)
-    intro = db.Column(db.Text, unique=True, nullable=False)
-    subtitle2 = db.Column(db.String(80), unique=False, nullable=True)
-    body = db.Column(db.Text, unique=True, nullable=True)
-    subtitle3 = db.Column(db.String(80), unique=False, nullable=True)
-    conclusion = db.Column(db.Text, unique=True, nullable=True)
-    date = db.Column(db.DateTime, unique=True, nullable=False)
-
-    def __init__(self, id, imgHead, title, subtitle1, intro, subtitle2, body, subtitle3, conclusion, date):
-        self.id = id
-        self.imgHead = imgHead
-        self.title = title
-        self.subtitle1 = subtitle1
-        self.intro = intro
-        self.subtitle2 = subtitle2
-        self.body = body
-        self.subtitle3 = subtitle3
-        self.conclusion = conclusion
-        self.date = date
-
-
 JSGlue(app)
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route("/")
 @app.route("/home")
 def index():
     return render_template("index.html")
 
+
 @app.route("/about")
 def about():
     return render_template("about.html")
+
 
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
 
-@app.route("/prospectRoulette")
-def prospectRoulette():
-    return render_template("prospectRoulette.html")
-
-@app.route("/myBlog")
-def myBlog():
-    return render_template("myBlog.html")
-
-@app.route("/scoreCard")
-def scoreCard():
-    return render_template("scoreCard.html")
 
 @app.route("/post", methods=['GET', 'POST'])
 def post():
     if request.method == "GET":
-        posts = Blog.query.order_by(desc(Blog.date)).all()
-
-        return render_template("allPosts.html", posts=posts)
+        return render_template("allPosts.html")
     
     else:
         return url_for("/")
 
+
 @app.route("/blog/<blogTitle>", methods=['GET', 'POST'])
 def blog(blogTitle):
     if request.method == "GET":
+        if blogTitle == "":
+            return redirect(url_for("page_not_found"))
+
         if blogTitle == None:
-            return redirect(url_for('post'))
+            return redirect(url_for("page_not_found"))
 
-        posts = Blog.query.filter_by(title=blogTitle).first()
-        print(posts)
-        
-        if posts != None:
-            post = BlogPost(posts.id, posts.imgHead, posts.title, posts.subtitle1, posts.intro, posts.subtitle2, posts.body, posts.subtitle3, posts.conclusion, posts.date)
-            return render_template("post.html", blogPost=post)
+        name = blogTitle + ".html"
+        # CITATION: https://stackoverflow.com/questions/10377998/how-can-i-iterate-over-files-in-a-given-directory
+        for filename in os.listdir(""):
+            if filename.lower() == name:
+                post = "blogPosts/" + name
+                return render_template(post)
 
-        else:
-            return redirect(url_for('post'))
-    else:    
-        return redirect(url_for('post'))
-
-@app.route("/admin", methods=['GET', 'POST'])
-def admin():
-    if request.method == "POST":
-        # Ensure username was submitted
-        if not request.form.get("username"):
-            return render_template("adminLogin.html")
-
-        # Ensure password was submitted
-        if not request.form.get("password"):
-            return render_template("adminLogin.html")
-
-        print("TEST!!!!!!")
-        print(request.form.get("username"))
-        print(request.form.get("password"))
-        
-
-        if request.form.get("username") == "" and request.form.get("password") == "":
-            return render_template("insertBlog.html")
-        
-        return render_template("adminLogin.html")
-
+        return redirect(url_for("page_not_found"))
+    
     else:
-        return render_template("adminLogin.html")
-
-@app.route("/_insertBlog", methods=['GET', 'POST'])
-def _insertBlog():
-    if request.method == "POST":
-        # Server-side validation
-        # check if the post request has the file part
-        # if 'file' not in request.files:
-        #     flash('No file part')
-        #     return redirect(request.url)
-        # file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        # if file.filename == '':
-        #     flash('No selected file')
-        #     return redirect(request.url)
-        # if file and allowed_file(file.filename):
-        #     filename = secure_filename(file.filename)
-        #     print(filename)
-        #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
-        if not request.form.get("title"):
-            return render_template("insertBlog.html")
-
-        if not request.form.get("introduction"):
-            return render_template("insertBlog.html")
+        return redirect(url_for("page_not_found"))
+    
+    return redirect(url_for("page_not_found"))
 
 
-        # Variable initialization
-        file = request.files.get("file")
-        img = "/static/img/"
-        if file != None:
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                print(filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            
-            img += filename
-
-        else:
-            img += "personal background.jpg"
-
-        # print(img)
-        blogTitle = request.form.get("title")
-        blogSub1 = request.form.get("subtitle1")
-        blogIntro = request.form.get("introduction")
-        blogSub2 = request.form.get("subtitle2")
-        blogBody = request.form.get("body")
-        blogSub3 = request.form.get("subtitle3")
-        blogConclusion = request.form.get("conclusion")
-        blogTime = datetime.now()
-        
-
-        #Insert new Blog
-        newBlog = Blog(None, img, blogTitle, blogSub1, blogIntro, blogSub2, blogBody, blogSub3, blogConclusion, blogTime)
-        db.session.add(newBlog)
-        db.session.commit()
-
-
-        return jsonify(result="Success!!!")
-
-    else:
-        return render_template("adminLogin.html")
+# CITATION: http://flask.pocoo.org/docs/0.12/patterns/errorpages/
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404

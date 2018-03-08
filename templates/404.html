@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Page not found
+{% endblock %}
+
+{% block main %}
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('BACKGR1.JPG')">
+            <div class="overlay"></div>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                  <div class="post-heading">
+                    <h1>Page Not Found</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+      
+          <!-- Post Content -->
+          <article>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <!-- CITATION: http://flask.pocoo.org/docs/0.12/patterns/errorpages/ -->
+                    <h1>Page Not Found</h1>
+                    <p>What you were looking for is just not there.
+                    <p><a href="{{ url_for('index') }}">Go Home!</a>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </article>
+
+{% endblock %}
