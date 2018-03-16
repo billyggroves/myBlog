@@ -1,9 +1,6 @@
 import os
-from flask_sqlalchemy import SQLAlchemy
 from flask_jsglue import JSGlue
-from flask import Flask, render_template, request, session, jsonify, send_from_directory, url_for, redirect
-from werkzeug.utils import secure_filename
-from sqlalchemy import desc
+from flask import Flask, render_template, request, url_for, redirect
 from datetime import datetime
 from blogPost import BlogPost
 
