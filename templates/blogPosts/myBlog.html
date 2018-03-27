@@ -76,7 +76,10 @@
               blogPosts, which contains all of my blog posts. Lastly, the app.py file contains the Flask and
               python code.
               <br>
-              <img src="/static/img/profilePic.jpg" class="rounded-circle">
+              <br>
+              <h5>Application Structure:</h5>
+              <img src="/static/img/fileStruct.PNG">
+              <br>
               <br>
               Inside the static folder are all of the CSS, JS, and images. Since I currently lack in my design
               skills, I decided to use a bootstrap template and modify as needed. Doing this saved me both
@@ -87,7 +90,10 @@
               comment section very soon. Finally, the static folder contains all the images, including the back
               images and any image that is contained within the website.
               <br>
-              <img src="/static/img/profilePic.jpg" class="rounded-circle">
+              <br>
+              <h5>CSS Structure:</h5>
+              <img src="/static/img/cssStruct.PNG">
+              <br>
               <br>
               The templates folder contains all of my HTML files which stores the information that I need
               displayed to the user. With Flask, you generally use one HTML file that contains an abstract
@@ -97,13 +103,16 @@
               to write near as much boiler plate code and was left with simple clean code that is easy to read
               and create.
               <br>
-              <img src="/static/img/profilePic.jpg" class="rounded-circle">
+              <br>
+              <h5>This replaces almost 100 lines of code for each html file:</h5>
+              <img src="/static/img/tempExtended.PNG">
+              <br>
               <br>
               I created the file app.py for the server aspect. This is where all the python is located. Mostly
               this file contains functions that will render the appropriate HTML file for the given route using
               the render template function in Flask. If the URL is not found, the 404.html file is rendered,
               informing the user of the error. There is one function that is a little more sophisticated. That is
-              the function called blog() that contains more dynamism in its render capabilities. The basic
+              the function called <code>blog()</code> that contains more dynamism in its render capabilities. The basic
               functionality of my blog() function requires a blog title to be passed through via a http GET
               request. If one is not passed and the blog function is called, it will render a 404 page not found
               message instead. So, once blog() is called with the blog title passed through, the function will
@@ -111,8 +120,14 @@
               matching title. Once a matching title is found the post’s HTML will be rendered. However, if the
               title is not found, then the user will be redirected to the 404 page not found page.
               <br>
-              <!-- <img src="/static/img/profilePic.jpg" class="rounded-circle"> -->
               <br>
+              <h5>blog() function that renders the blog post selected:</h5>
+              <img src="/static/img/blogFunction.PNG">
+              <br>
+              <br>
+            </p>
+            <h2 class="section-heading">Conclusion:</h2>
+            <p>
               Although this was a rather simple project, I was able to learn and grow my skills and knowledge
               through its development. I was able to learn the importance of requirement gathering and
               planning before actually developing a project. I strengthened my python and Flask skills by
