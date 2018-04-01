@@ -35,7 +35,7 @@ def post():
 
 @app.route("/blog/<blogTitle>", methods=['GET', 'POST'])
 def blog(blogTitle):
-    if request.method == "POST":
+    if request.method == "GET":
         if blogTitle == "":
             return redirect(url_for("page_not_found"))
 
