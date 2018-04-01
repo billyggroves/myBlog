@@ -30,17 +30,17 @@ def post():
         return render_template("allPosts.html")
     
     else:
-        return redirect(url_for("page_not_found", "error"))
+        return redirect(url_for("page_not_found"))
 
 
 @app.route("/blog/<blogTitle>", methods=['GET', 'POST'])
 def blog(blogTitle):
     if request.method == "GET":
         if blogTitle == "":
-            return redirect(url_for("page_not_found", "error"))
+            return redirect(url_for("page_not_found"))
 
         if blogTitle == None:
-            return redirect(url_for("page_not_found", "error"))
+            return redirect(url_for("page_not_found"))
 
         name = blogTitle + ".html"
         print(name)
@@ -50,14 +50,17 @@ def blog(blogTitle):
             if filename.lower() == name:
                 post = "blogPosts/" + name
                 print(post)
-                return render_template(post)
+                try:
+                    return render_template(post)
+                finally:
+                     return redirect(url_for("page_not_found"))
 
-        return redirect(url_for("page_not_found", "error"))
+        return redirect(url_for("page_not_found"))
     
     else:
-        return redirect(url_for("page_not_found", "error"))
+        return redirect(url_for("page_not_found"))
     
-    return redirect(url_for("page_not_found", "error"))
+    return redirect(url_for("page_not_found"))
 
 
 # CITATION: http://flask.pocoo.org/docs/0.12/patterns/errorpages/
