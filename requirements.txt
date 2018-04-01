@@ -11,11 +11,13 @@ Flask-Mail==0.7.6
 Flask-SQLAlchemy==2.3.1
 Flask-WTF==0.8.4
 flup==1.0.3
+gunicorn==19.7.1
 idna==2.6
 itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
-# psycopg2==2.7.4
+pipenv==11.9.0
+psycopg2==2.7.4
 pydocumentdb==2.3.1
 pytz==2013b0
 requests==2.18.4
@@ -26,5 +28,6 @@ sqlalchemy-migrate==0.7.2
 Tempita==0.5.2
 urllib3==1.22
 virtualenv==15.1.0
+virtualenv-clone==0.3.0
 Werkzeug==0.14.1
 WTForms==2.1
