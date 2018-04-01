@@ -45,6 +45,7 @@ def blog(blogTitle):
         name = blogTitle + ".html"
         # CITATION: https://stackoverflow.com/questions/10377998/how-can-i-iterate-over-files-in-a-given-directory
         for filename in os.listdir("./templates/blogPosts"):
+            print(filename)
             if filename.lower() == name:
                 post = "blogPosts/" + name
                 return render_template(post)
