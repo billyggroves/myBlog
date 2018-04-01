@@ -49,12 +49,8 @@ def blog(blogTitle):
             print(filename)
             if filename.lower() == name:
                 post = "blogPosts/" + name
-                
-                try:
-                    print(post)
-                    return render_template(post)
-                finally:
-                     return redirect(url_for("page_not_found"))
+                print(post)
+                return render_template(post)
 
         return redirect(url_for("page_not_found"))
     
