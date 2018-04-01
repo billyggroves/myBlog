@@ -43,6 +43,7 @@ def blog(blogTitle):
             return redirect(url_for("page_not_found"))
 
         name = blogTitle + ".html"
+        print(name)
         # CITATION: https://stackoverflow.com/questions/10377998/how-can-i-iterate-over-files-in-a-given-directory
         for filename in os.listdir("./templates/blogPosts"):
             print(filename)
