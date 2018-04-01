@@ -59,5 +59,6 @@ def blog(blogTitle):
 
 # CITATION: http://flask.pocoo.org/docs/0.12/patterns/errorpages/
 @app.errorhandler(404)
-def page_not_found(e):
+@app.route("/page_not_found", methods=['GET', 'POST'])
+def page_not_found():
     return render_template('404.html'), 404
