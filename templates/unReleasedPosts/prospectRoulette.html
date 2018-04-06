@@ -17,7 +17,7 @@
               <h2 class="subheading">My prospect tracking application!</h2>
               <span class="meta">Posted by
                 <a href="/about">Bill Groves</a>
-                on March 1st, 2018</span>
+                on April 5, 2018</span>
             </div>
           </div>
         </div>
@@ -31,70 +31,78 @@
           <div class="col-lg-8 col-md-10 mx-auto">
             <p>
               <a href="https://protected-hollows-32305.herokuapp.com/">Prospect Roulette</a> 
-              is a web application that I made while working as a sales representative in order to track my prospects. 
-              We were provided with ERP software that included a very simple prospect tracker. 
-              However, the system was very frustrating and provided me with very little help. 
-              In fact, the process of adding new prospects and entering notes for the prospects are on two completely 
-              different interfaces. 
-              So, I would have to enter the prospects using a remote desktop and then use the 
-              web application that was connected to the same database to enter notes for those prospects. 
-              Then, once you try to find the prospects that you have entered, you have to filter through all the 
-              prospects and clients for your whole branch. So, this drove me crazy and wanted to make something that 
-              was simple and quick to use. This is where I came up with the idea for 
+              is a web application I made while working as a sales representative to track 
+              my prospects. We were provided with an ERP program that included a simple CRM 
+              web program for the sales team. This CRM system was very frustrating and provided 
+              me with very little help. In fact, the process of adding new prospects and entering 
+              notes for the prospects are on two completely different programs. I would have to 
+              enter the prospects information using a remote desktop. Then, I would have to 
+              log into the web application that was connected to the same database to enter 
+              notes for those prospects. Once, you log in you must search through the entire 
+              database of prospects for your branch office to find the one you just entered. 
+              I wanted to make something that was simple and quick to use. This is where I 
+              came up with the idea for 
               <a href="https://protected-hollows-32305.herokuapp.com/">Prospect Roulette</a>.
             </p>
             <h2 class="section-heading">Development Process:</h2>
             <p>
-                I chose to build this application using bootstrap, python with the 
-                <a href="http://flask.pocoo.org/">Flask</a> framework, 
-                <a href="https://jquery.com/">jQuery</a>, and 
-                <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>. 
-                These selections were largely influenced by the 
-                <a href="https://www.edx.org/">edx.org</a> course, 
-                <a href="https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x">CS50</a>. 
-                Where I learned how to program in C, python, 
-                <a href="http://flask.pocoo.org/">Flask</a> framework, 
-                and gave me a more in-depth understanding of general computer science concepts. 
-                I chose these, because I was most familiar with these languages and frameworks and felt that 
-                I would be able to create this project very efficiently in terms of time and quality. 
-                However, time was the most important since I really needed something as quick as possible, 
-                to help me save time in order to produce more sales.
-                <hr>
-                I started off by performing quick requirements for 
-                <a href="https://protected-hollows-32305.herokuapp.com/">Prospect Roulette</a>. 
-                I knew I wanted to quickly be able to look at a list of my prospects or my clients. 
-                So, I created two HTML pages, one for each. I knew that I wanted to be able to quickly insert 
-                clients or prospects into the application. So, I created an HTML page for inserting data. 
-                While, determining the requirements, I could not think of what I would want the homepage to look like. 
-                I finally thought of a good idea, where I would write an algorithm which would pull ten prospects that 
-                I hadn't contacted for at least a week, that way I would be able to get reminded of some that I may have 
-                forgotten about (This was the inspiration for me to create the name for Prospect Roulette). 
-                So, I created an HTML page for the homepage.
-                <hr>
-                I then created the backend where I had the python(Flask) code create the lists, 
-                generate the data onto the HTML pages, and insert the data into the database. 
-                Once, I had all the data forming onto the HTML pages, I then created a more interactive UI/UX with 
-                <a href="https://jquery.com/">jQuery</a>. 
-                I made it where if the user would click one of the prospects or clients, 
-                then that div would expand and show a list of all the notes for the system as well as all the 
-                contact information. Then, the user was able to notes and contact information straight from the list.  
-                I also made it, so the data was passed through jQuery with ajax in order to keep the page from refreshing, 
-                so the user could insert data more quickly.
-                <hr>
-                Finally, I deployed this application onto 
-                <a href="https://www.heroku.com/">Heroku</a> with a create 
-                <a href="https://www.postgresql.org/">PostgreSQL</a> database. 
-                This was the biggest learning curve for me, because it was the first time I had actually deployed any project. 
-                Since, all of the programs that I had created before, were all just local projects that I did not need to deploy. 
-                I chose to deploy 
-                <a href="https://protected-hollows-32305.herokuapp.com/">Prospect Roulette</a>. 
-                I chose to host my application on 
-                <a href="https://www.heroku.com/">Heroku</a>, 
-                because it was free for the most part, however, it was also easy to learn and works very well with the 
-                <a href="http://flask.pocoo.org/">Flask</a> framework.
+              I started off by gathering requirements for 
+              <a href="https://protected-hollows-32305.herokuapp.com/">Prospect Roulette</a>. 
+              I knew I wanted to quickly be able to look at a list of my prospects or my 
+              clients. So, I created two HTML pages, one for each. I knew that I wanted to 
+              be able to quickly insert clients or prospects into the application. 
+              I created an HTML page for inserting data. While, determining the requirements, 
+              I could not think of what I would want the homepage to look like. I thought of 
+              an idea, where I would write an algorithm which would pull ten prospects that 
+              I hadn't contacted for at least a week. This would be a great reminder for 
+              some of the prospects which I may have forgotten about 
+              (This was the inspiration for me to create the name for Prospect Roulette). 
+              So, I created an HTML page for the homepage.
             </p>
-            <h2 class="section-heading">Screenshots:</h2>
-            <p>Test</p>
+            <p>
+              I chose to build this application using bootstrap, python with the 
+              <a href="http://flask.pocoo.org/">Flask</a> framework, 
+              <a href="https://jquery.com/">jQuery</a>, and 
+              <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>. 
+              These selections were largely influenced by the 
+              <a href="https://www.edx.org/">edx.org</a> course, 
+              <a href="https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x">CS50</a>. 
+              This course is where I learned how to program in C, python, 
+              <a href="http://flask.pocoo.org/">Flask</a> 
+              framework and gave me a more in-depth understanding of general computer 
+              science concepts. I chose these, because I was most familiar with these 
+              languages and frameworks and felt that I would be able to create this 
+              project very efficiently in terms of time and quality. However, 
+              time was the most important since I really needed something as 
+              quick as possible, to help me save time and produce more sales.
+            </p>
+            <p>
+              The backend contains the python (Flask) code which create the lists, 
+              generate the data onto the HTML pages, and insert the data into the database. 
+              With all the data transferring onto the HTML pages, I then created a more 
+              interactive UI/UX with 
+              <a href="https://jquery.com/">jQuery</a>. 
+              This enabled the user to click on a company’s <code>&lt;div&gt;</code> then that 
+              <code>&lt;div&gt;</code> would expand and show a list of all the notes for the 
+              company as well as all the company’s contact information. Then, the user was 
+              able to add notes and contact information straight from the list. I also made 
+              the data be transferred through jQuery with ajax to keep the page from refreshing, 
+              so the user could insert data more quickly. This made for a much cleaner experience 
+              for the user.
+            </p>
+            <p>
+              Finally, I deployed this application onto 
+              <a href="https://www.heroku.com/">Heroku</a> with a 
+              <a href="https://www.postgresql.org/">PostgreSQL</a> database. This was the 
+              biggest learning curve for me, because it was the first time I had deployed 
+              any project. Since, all the programs that I had created before, were all just 
+              local projects that I did not need to deploy. I chose to deploy 
+              <a href="https://protected-hollows-32305.herokuapp.com/">Prospect Roulette</a>. 
+              I chose to host my application on 
+              <a href="https://www.heroku.com/">Heroku</a>, because it was free for the most 
+              part, however, it was also easy to learn and integrates well with the 
+              <a href="http://flask.pocoo.org/">Flask</a> framework.
+            </p>
           </div>
         </div>
       </div>
