@@ -27,7 +27,7 @@ SQLAlchemy==1.2.3
 sqlalchemy-migrate==0.7.2
 Tempita==0.5.2
 urllib3==2.6.0
-virtualenv==15.1.0
+virtualenv==20.26.6
 virtualenv-clone==0.3.0
 Werkzeug==3.1.4
 WTForms==2.1
