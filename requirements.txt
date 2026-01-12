@@ -29,5 +29,5 @@ Tempita==0.5.2
 urllib3==2.6.0
 virtualenv==15.1.0
 virtualenv-clone==0.3.0
-Werkzeug==3.1.4
+Werkzeug==3.1.5
 WTForms==2.1
